@@ -10,28 +10,22 @@ class App extends Component {
             {text:'Sacar la ropa'},
             {text:'Hacer la cama'},
             {text:'Leer un rato'}
-        ],
-        value: ""
-
+        ]
     };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.updateInputValue = this.updateInputValue.bind(this);
   }
-  handleChange(e) {
-    this.setState({value: e.target.value});
-  }
-
-  handleSubmit(e) {
+  
+  updateInputValue(e) {
     e.preventDefault();
-    
     let item = {
-        text: this.state.value 
+        text: e.target.text.value 
     }
 
     this.setState({
       items: this.state.items.concat([item])
     })
-    this.setState({value: ''});
+
+    e.target.text.value = '';
   }
 
   render() {
@@ -46,8 +40,8 @@ class App extends Component {
                 )
               })}
           </ul>
-          <form onSubmit={this.handleSubmit}>
-            <input type="text" id="new-task" placeholder="Ingresa una tarea y oprime Enter" value={this.state.value} onChange={this.handleChange}/>
+          <form onSubmit={this.updateInputValue}>
+            <input type="text" id="new-task" name="text" placeholder="Ingresa una tarea y oprime Enter"/>
           </form>
         </div>
       </div>
